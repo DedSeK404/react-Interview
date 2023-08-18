@@ -1,38 +1,152 @@
+@import url("https://fonts.googleapis.com/css2?family=Pragati+Narrow&family=Roboto+Mono:wght@700&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 .App {
-  text-align: center;
+  background-color: #e2cfc1;
+}
+.Box {
+  border: red 2px solid;
+  width: 85%;
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5%;
+  justify-content: center;
+}
+.CardContainer {
+  width: 20%;
+  margin-top: 3%;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  background: rgb(250, 235, 228);
+  background: linear-gradient(
+    0deg,
+    rgba(250, 235, 228, 1) 0%,
+    rgba(210, 194, 179, 1) 100%
+  );
+  transition: 0.2s;
+}
+.CardContainer:hover {
+  width: 20%;
+  margin-top: 3%;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  background: linear-gradient(
+    0deg,
+    rgba(250, 235, 228, 1) 0%,
+    rgba(210, 194, 179, 1) 100%
+  );
+  transition: 0.2s;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.textContainer {
+  padding: 5%;
+}
+.details {
+  font-family: "Pragati Narrow", sans-serif;
+  color: #857770;
+  line-height: 1em;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.title {
+  display: inline-block;
+  position: relative;
+  color: #df7128;
+  width: fit-content;
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: "Roboto Mono", monospace;
+  user-select: none;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.title:after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 1px;
+  bottom: 0;
+  left: 0;
+  background-color: #df7128;
+  transform-origin: bottom left;
+  transition: transform 0.25s ease-out;
+}
+
+.CardContainer:hover .title:after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+  cursor: pointer;
+}
+.imageBox {
+  overflow: hidden;
+  width: 100%;
+}
+.image {
+  max-width: 100%;
+  transition: all 0.3s;
+  display: block;
+  width: 100%;
+  height: auto;
+  transform: scale(1);
+  background: rgb(205, 140, 120);
+  background: linear-gradient(
+    90deg,
+    rgba(205, 140, 120, 1) 0%,
+    rgba(202, 140, 99, 1) 100%
+  );
+}
+.image:hover {
+  cursor: pointer;
+}
+
+.CardContainer:hover .image {
+  transform: scale(1.1);
+}
+
+/* Like & Dislike */
+
+.ratioContainer {
   display: flex;
   flex-direction: column;
+  gap: 5px;
+}
+.percentages {
+  display: flex;
+  justify-content: space-between;
+}
+.likes {
+  color: #df7128;
+  font-size: 0.8rem;
+}
+.dislikes {
+  color: #857770;
+  font-size: 0.8rem;
+}
+
+.LikeButton {
+  width: 50%;
+  display: flex;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  gap: 10px;
+  padding: 5px 10px;
+  border: 2px solid blue;
+  color: #cf3801;
+  fill: red;
 }
-
-.App-link {
-  color: #61dafb;
+.LikeImage{
+  fill: red;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.DislikeButton {
+  width: 50%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 5px 10px;
+  border: 2px solid red;
+  color: #9ca3af;
+}
+.ReactButtons {
+  display: flex;
 }

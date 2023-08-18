@@ -1,0 +1,5 @@
+export const LOADING = "LOADING";
+
+export const GETALLPRODUCTSSUCCESS = "GETALLPRODUCTSSUCCESS";
+
+export const FAILED = "FAILED";
