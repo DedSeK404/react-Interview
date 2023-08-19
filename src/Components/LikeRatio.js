@@ -1,7 +1,17 @@
 import React, { useEffect, useState } from "react";
 
 const LikeRatio = ({ LikeData }) => {
-  console.log(LikeData.likes);
+  const [like, setLike] = useState(0);
+  const clickLike = () => {
+    setLike(!like);
+    setDislike(false);
+  };
+  const [dislike, setDislike] = useState(0);
+  const clickDislike = () => {
+    setDislike(!dislike);
+    setLike(false);
+  };
+
   const [likePercentage, setLikePercentage] = useState(0);
   const [dislikePercentage, setDisLikePercentage] = useState(0);
   useEffect(() => {
@@ -22,14 +32,20 @@ const LikeRatio = ({ LikeData }) => {
     <div className="ratioContainer">
       <div>
         <div className="flex justify-between mb-1">
-          <div className="flex justify-between mb-1 gap-1 items-center">
-          <i class="bi bi-hand-thumbs-up-fill"></i>
+          <div>
+            <i
+              style={{ color: "#cf3801" }}
+              className="bi bi-hand-thumbs-up-fill"
+            ></i>
             <span className="text-xs font-small text-orange-600 dark:text-white">
               {Math.round(likePercentage)}%
             </span>
           </div>
-          <div className="flex justify-between mb-1 gap-1 items-center">
-          <i class="bi bi-hand-thumbs-down-fill"></i>
+          <div>
+            <i
+              style={{ color: "#9ca3af" }}
+              className="bi bi-hand-thumbs-down-fill"
+            ></i>
             <span className="text-xs font-small text-gray-400 dark:text-white">
               {Math.round(dislikePercentage)}%
             </span>
@@ -44,14 +60,19 @@ const LikeRatio = ({ LikeData }) => {
       </div>
       {/* Buttons */}
       <div className="ReactButtons">
-        <div className="LikeButton">
-         
-          <i class="bi bi-hand-thumbs-up"></i> {LikeData.likes}
-        </div>
-        <div className="DislikeButton">
-        <i class="bi bi-hand-thumbs-down"></i>
+        <button
+          onClick={clickLike}
+          className={like ? "LikeButtonPressed" : "LikeButton"}
+        >
+          <i className="bi bi-hand-thumbs-up"></i> {LikeData.likes}
+        </button>
+        <button
+          onClick={clickDislike}
+          className={dislike ? "DislikeButtonPressed" : "DislikeButton"}
+        >
+          <i className="bi bi-hand-thumbs-down"></i>
           {LikeData.dislikes}
-        </div>
+        </button>
       </div>
     </div>
   );

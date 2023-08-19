@@ -15,7 +15,7 @@ const _products: Product[] = [
     likes: 120,
     dislikes: 10,
     image:"PremiumWirelessHeadphones.png",
-    details:"Stereo headphones that connect to a user's cellphone, music player, computer or stereo"
+    details:"Stereo headphones that connect to a user's cellphone, music player, computer or stereo, made with high quality and envirnoment friendly materials "
   },
   {
     id: '2',
@@ -42,7 +42,7 @@ const _products: Product[] = [
     likes: 4,
     dislikes: 0,
     image:"BluetoothPortableSpeaker.png",
-    details:"a sound device that is aimed at making it easier for you to enjoy listening to your music or favorite podcasts",
+    details:"a sound device that is aimed at making it easier for you to enjoy listening to your music or favorite podcasts,movies or any tupe of media",
   },
   {
     id: '5',
@@ -114,7 +114,7 @@ const _products: Product[] = [
     likes: 35,
     dislikes: 2,
     image:"Plant-BasedProteinPowder.png",
-    details:"made from various plants, such as brown rice, soy, or pea, and are vegan-friendly and lactose-free",
+    details:"made from various plants, such as brown rice, soy, or pea, and are vegan-friendly and lactose-free, best for people with lactose intolerance",
   },
   {
     id: '13',
@@ -141,7 +141,7 @@ const _products: Product[] = [
     likes: 4,
     dislikes: 7,
     image:"SmartphoneCameraLensKit.png",
-    details:"Camera Lens Kit, 14 in 1 Lenses with Selfie Light for iPhone 14 13 Samsung and Other Andriod Smartphone",
+    details:"Camera Lens Kit, 14 in 1 Lenses with Selfie Light for iPhone X Xs Xs max 11 11 Pro 11 Pro Max 14 13 Samsung and Other Andriod Smartphone",
   },
 ];
 

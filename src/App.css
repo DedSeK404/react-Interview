@@ -3,12 +3,32 @@
 @tailwind components;
 @tailwind utilities;
 
+@media only screen and (max-width: 600px) {
+  .Box {
+    width: 200px;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5%;
+    justify-content: center;
+  }
+}
+
+ 
+  
+  
+  
 .App {
   background-color: #e2cfc1;
+  min-height: 100vh;
+}
+.AppLoading {
+  background-color: #e2cfc1;
+  height: 100vh;
+  width: 100vw;
 }
 .Box {
-  border: red 2px solid;
-  width: 85%;
+  width: 90%;
   margin: auto;
   display: flex;
   flex-wrap: wrap;
@@ -16,6 +36,9 @@
   justify-content: center;
 }
 .CardContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   width: 20%;
   margin-top: 3%;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
@@ -30,9 +53,8 @@
 .CardContainer:hover {
   width: 20%;
   margin-top: 3%;
-  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
-    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
-    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
+    rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
   background: linear-gradient(
     0deg,
     rgba(250, 235, 228, 1) 0%,
@@ -40,25 +62,61 @@
   );
   transition: 0.2s;
 }
-
+.loadingCard {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 250px;
+  background: linear-gradient(
+    90deg,
+    rgba(205, 140, 120, 1) 0%,
+    rgba(202, 140, 99, 1) 100%
+  );
+}
 .textContainer {
   padding: 5%;
 }
-.details {
+
+.showMore {
+  color: #df7128;
+  text-align: end;
+  font-size: smaller;
+  cursor: pointer;
+}
+/* Colapse Text */
+
+.longText {
+  max-height: 50px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  display: inline-block;
+  transition: max-height 0.4s;
   font-family: "Pragati Narrow", sans-serif;
   color: #857770;
-  line-height: 1em;
+  line-height: 1.5em;
+}
+.expanded {
+  max-height: 50rem;
+  transition: max-height 2s;
 }
 
 .title {
   display: inline-block;
   position: relative;
   color: #df7128;
-  width: fit-content;
   font-size: 1rem;
   font-weight: 600;
   font-family: "Roboto Mono", monospace;
   user-select: none;
+  margin-bottom: 10px;
+}
+
+.category {
+  color: #cf3801;
+  font-weight: 600;
+  font-size: small;
 }
 
 .title:after {
@@ -90,7 +148,6 @@
   width: 100%;
   height: auto;
   transform: scale(1);
-  background: rgb(205, 140, 120);
   background: linear-gradient(
     90deg,
     rgba(205, 140, 120, 1) 0%,
@@ -111,42 +168,196 @@
   display: flex;
   flex-direction: column;
   gap: 5px;
+  padding: 5%;
 }
 .percentages {
   display: flex;
   justify-content: space-between;
-}
-.likes {
-  color: #df7128;
-  font-size: 0.8rem;
-}
-.dislikes {
-  color: #857770;
-  font-size: 0.8rem;
 }
 
 .LikeButton {
   width: 50%;
   display: flex;
   align-items: center;
-  gap: 10px;
+  justify-content: center;
+  gap: 5px;
   padding: 5px 10px;
-  border: 2px solid blue;
+  border: 1px solid #cf3801;
   color: #cf3801;
-  fill: red;
+  transition: 0.2s;
 }
-.LikeImage{
-  fill: red;
+.LikeButton:hover {
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: 5px 10px;
+  border: 1px solid #ff6600;
+  color: white;
+  background-color: #ff6600;
+  transition: 0.2s;
 }
+.LikeButtonPressed {
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: 5px 10px;
+  border: 1px solid #cf3801;
+  background-color: #cf3801;
+  color: white;
+  transition: 0.2s;
+}
+
 .DislikeButton {
   width: 50%;
   display: flex;
   align-items: center;
-  gap: 10px;
+  justify-content: center;
+  gap: 5px;
   padding: 5px 10px;
-  border: 2px solid red;
+  border: 1px solid #9ca3af;
   color: #9ca3af;
+  border-left: none;
+  transition: 0.2s;
+}
+
+.DislikeButton:hover {
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: 5px 10px;
+  border: 1px solid #cdd3dd;
+  color: white;
+  border-left: none;
+  background-color: #cdd3dd;
+  transition: 0.2s;
+}
+
+.DislikeButtonPressed {
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: 5px 10px;
+  border: 1px solid #9ca3af;
+  color: white;
+  border-left: none;
+  background-color: #9ca3af;
+  transition: 0.2s;
 }
 .ReactButtons {
   display: flex;
 }
+
+/* Pagination */
+
+.paginationContainer {
+  display: flex;
+  gap: 10px;
+  align-items: end;
+  margin: auto;
+  width: fit-content;
+  padding: 2% 0%;
+}
+
+.showButton4 {
+  background-color: white;
+  border: 1px solid #d1d5db;
+  padding: 8px;
+  color: #6b7280;
+  font-size: smaller;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  transition: 0.2s;
+}
+.showButton8 {
+  background-color: white;
+  border: 1px solid #d1d5db;
+  border-left: none;
+  border-right: none;
+  padding: 8px;
+  color: #6b7280;
+  font-size: smaller;
+  transition: 0.2s;
+}
+.showButton12 {
+  background-color: white;
+  border: 1px solid #d1d5db;
+  padding: 8px;
+  color: #6b7280;
+  font-size: smaller;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  transition: 0.2s;
+}
+
+.showButton4:hover {
+  background-color: #f3f4f5;
+  border: 1px solid #d1d5db;
+  padding: 8px;
+  color: #384152;
+  font-size: smaller;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  transition: 0.2s;
+}
+.showButton8:hover {
+  background-color: #f3f4f5;
+  border: 1px solid #d1d5db;
+  border-left: none;
+  border-right: none;
+  padding: 8px;
+  color: #384152;
+  font-size: smaller;
+  transition: 0.2s;
+}
+.showButton12:hover {
+  background-color: #f3f4f5;
+  border: 1px solid #d1d5db;
+  padding: 8px;
+  color: #384152;
+  font-size: smaller;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  transition: 0.2s;
+}
+
+.showButton4active {
+  background-color: #384152;
+  border: 1px solid #384152;
+  padding: 8px;
+  color: #f3f4f5;
+  font-size: smaller;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  transition: 0.2s;
+}
+.showButton8active {
+  background-color: #384152;
+  border: 1px solid #384152;
+  border-left: none;
+  border-right: none;
+  padding: 8px;
+  color: #f3f4f5;
+  font-size: smaller;
+  transition: 0.2s;
+}
+.showButton12active {
+  background-color: #384152;
+  border: 1px solid #384152;
+  padding: 8px;
+  color: #f3f4f5;
+  font-size: smaller;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  transition: 0.2s;
+}
+
+
+
