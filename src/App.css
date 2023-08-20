@@ -14,10 +14,6 @@
   }
 }
 
- 
-  
-  
-  
 .App {
   background-color: #e2cfc1;
   min-height: 100vh;
@@ -193,9 +189,9 @@
   justify-content: center;
   gap: 5px;
   padding: 5px 10px;
-  border: 1px solid #ff6600;
+  border: 1px solid #ff531f;
   color: white;
-  background-color: #ff6600;
+  background-color: #ff531f;
   transition: 0.2s;
 }
 .LikeButtonPressed {
@@ -254,6 +250,16 @@
 .ReactButtons {
   display: flex;
 }
+.deleteButton {
+  background-color: #cf3801;
+  color: white;
+  width: 100%;
+  font-size: smaller;
+  transition: 0.2s;
+}
+.deleteButton:hover {
+  padding-top: 5px;
+}
 
 /* Pagination */
 
@@ -300,32 +306,19 @@
 .showButton4:hover {
   background-color: #f3f4f5;
   border: 1px solid #d1d5db;
-  padding: 8px;
   color: #384152;
-  font-size: smaller;
-  border-top-left-radius: 10px;
-  border-bottom-left-radius: 10px;
-  transition: 0.2s;
 }
 .showButton8:hover {
   background-color: #f3f4f5;
   border: 1px solid #d1d5db;
   border-left: none;
   border-right: none;
-  padding: 8px;
   color: #384152;
-  font-size: smaller;
-  transition: 0.2s;
 }
 .showButton12:hover {
   background-color: #f3f4f5;
   border: 1px solid #d1d5db;
-  padding: 8px;
   color: #384152;
-  font-size: smaller;
-  border-top-right-radius: 10px;
-  border-bottom-right-radius: 10px;
-  transition: 0.2s;
 }
 
 .showButton4active {
@@ -358,6 +351,73 @@
   border-bottom-right-radius: 10px;
   transition: 0.2s;
 }
+.showButton4Disabled {
+  background-color: #f3f4f5;
+  opacity: 0.5;
+  border: 1px solid #d1d5db;
+  padding: 8px;
+  color: #6b7280;
+  font-size: smaller;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  transition: 0.2s;
+  cursor: auto;
+}
 
+.buttonDisabled8 {
+  background-color: #f3f4f5;
+  opacity: 0.5;
+  border: 1px solid #d1d5db;
+  border-left: none;
+  border-right: none;
+  padding: 8px;
+  color: #6b7280;
+  font-size: smaller;
+  transition: 0.2s;
+  cursor: auto;
+}
+.buttonDisabled12 {
+  background-color: #f3f4f5;
+  opacity: 0.5;
+  border: 1px solid #d1d5db;
+  padding: 8px;
+  color: #6b7280;
+  font-size: smaller;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  transition: 0.2s;
+  cursor: auto;
+}
 
+/* DropDown */
 
+.buttons-container {
+  display: flex;
+  justify-content: center;
+}
+.button {
+  background-color: white;
+  border: 1px solid #d1d5db;
+  color: #384152;
+  margin: 10px 5px;
+  border-radius: 10px;
+  padding: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  font-size: smaller;
+}
+
+.button:hover {
+  background-color: #4b566b;
+  border: 1px solid #4b566b;
+  padding: 8px;
+  color: white;
+}
+
+.active {
+  background-color: #384152;
+  border: 1px solid #384152;
+  padding: 8px;
+  color: #f3f4f5;
+  font-size: smaller;
+}

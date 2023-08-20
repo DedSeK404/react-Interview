@@ -4,7 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { getallproducts } from "./JS/actions/productsactions";
 import ProdCard from "./Components/Card";
 import CardLoading from "./Components/CardLoading";
-import { Pagination } from "flowbite-react";
+import PaginationComponent from "./Components/Pagination";
+import { v4 as uuidv4 } from "uuid";
 
 function App() {
   const dispatch = useDispatch();
@@ -28,53 +29,118 @@ function App() {
   const prods = products.slice(firstIndex, lastIndex);
   const npage = Math.ceil(products.length / productsPerPage);
 
+  const [selectedFilters, setSelectedFilters] = useState([]);
+  const [filteredItems, setFilteredItems] = useState(products);
+
+  let filters = [
+    "Electronics",
+    "Entertainment",
+    "Fashion",
+    "Food & Beverage",
+    "Health & Wellness",
+    "Home",
+    "Sports",
+  ];
+
+  const handleFilterButtonClick = (selectedCategory) => {
+    if (selectedFilters.includes(selectedCategory)) {
+      let filters = selectedFilters.filter((el) => el !== selectedCategory);
+      setSelectedFilters(filters);
+    } else {
+      setSelectedFilters([...selectedFilters, selectedCategory]);
+    }
+  };
+
+  useEffect(() => {
+    filterItems();
+  }, [selectedFilters]);
+
+  const filterItems = () => {
+    if (selectedFilters.length > 0) {
+      let tempItems = selectedFilters.map((selectedCategory) => {
+        let temp = products.filter(
+          (item) => item.category === selectedCategory
+        );
+        return temp;
+      });
+      setFilteredItems(tempItems.flat());
+    } else {
+      setFilteredItems([...products]);
+    }
+  };
+
+  // Pagination for filtered products
+  const [currentPageFiltered, setCurrentPageFiltered] = useState(1);
+
+  const [prodsPPFiltered, setProdsPPFiltered] = useState(4);
+  const [activePageFiltered, setActivePageFiltered] = useState(4);
+  const handleChangeFiltered = (number) => {
+    setProdsPPFiltered(number);
+    setActivePageFiltered(number);
+  };
+  const productsPerPageFiltered = prodsPPFiltered;
+  const lastIndexFiltered = currentPageFiltered * productsPerPageFiltered;
+  const firstIndexFiltered = lastIndexFiltered - productsPerPageFiltered;
+  const prodsFiltered = filteredItems.slice(
+    firstIndexFiltered,
+    lastIndexFiltered
+  );
+  const npageFiltered = Math.ceil(
+    filteredItems.length / productsPerPageFiltered
+  );
   return (
     <div className={loading ? "AppLoading" : "App"}>
       {loading ? (
         <CardLoading />
       ) : (
         <>
-          <div className="Box">
-            {prods.map((prod) => (
-              <ProdCard data={prod} key={prod.id} />
-            ))}
-          </div>
-          <div className="paginationContainer">
-            <Pagination
-              currentPage={currentPage}
-              layout="navigation"
-              onPageChange={(page) => {
-                setCurrentPage(page);
-              }}
-              totalPages={npage}
-            />
-            <div>
-              <button
-                onClick={() => handleChange(4)}
-                className={
-                  activePage == "4" ? "showButton4active" : "showButton4"
-                }
-              >
-                <i class="bi bi-columns-gap"></i> 4 per Page
-              </button>
-              <button
-                onClick={() => handleChange(8)}
-                className={
-                  activePage == "8" ? "showButton8active" : "showButton8"
-                }
-              >
-                <i class="bi bi-columns-gap"></i> 8 per Page
-              </button>
-              <button
-                onClick={() => handleChange(12)}
-                className={
-                  activePage == "12" ? "showButton12active" : "showButton12"
-                }
-              >
-                <i class="bi bi-columns-gap"></i> 12 per Page
-              </button>
+          <div>
+            <div className="buttons-container">
+              {filters.map((category, idx) => (
+                <button
+                  onClick={() => handleFilterButtonClick(category)}
+                  className={`button ${
+                    selectedFilters?.includes(category) ? "active" : ""
+                  }`}
+                  key={`filters-${idx}`}
+                >
+                  {category}
+                </button>
+              ))}
             </div>
           </div>
+          {filteredItems == 0 ? (
+            <>
+              <div className="Box">
+                {prods.map((prod) => (
+                  <ProdCard data={prod} key={uuidv4()} />
+                ))}
+              </div>
+              <PaginationComponent
+                currentPage={currentPage}
+                setCurrentPage={setCurrentPage}
+                npage={npage}
+                handleChange={handleChange}
+                activePage={activePage}
+              />
+            </>
+          ) : (
+            <>
+              <div className="Box">
+                {prodsFiltered.map((prod) => (
+                  <ProdCard data={prod} key={uuidv4()} />
+                ))}
+              </div>
+              <PaginationComponent
+                filteredItems={filteredItems}
+                currentPage={currentPageFiltered}
+                setCurrentPage={setCurrentPageFiltered}
+                npage={npageFiltered}
+                handleChange={handleChangeFiltered}
+                activePage={activePageFiltered}
+              />
+            </>
+          )}
         </>
       )}
     </div>

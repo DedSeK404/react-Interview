@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import LikeRatio from "./LikeRatio";
 import PictureModal from "./PictureModal";
 import { motion, AnimatePresence } from "framer-motion";
+import { Button, Modal } from "flowbite-react";
 
 const ProdCard = ({ data }) => {
   const [modalOpen, setModalOpen] = useState(false);
+
   const openModal = () => {
     setModalOpen(true);
   };
@@ -12,12 +14,13 @@ const ProdCard = ({ data }) => {
   const showMore = () => {
     setShow(!show);
   };
+
+  const [openCloseModal, setOpenCloseModal] = useState(false);
   return (
     <AnimatePresence>
       <motion.div
         initial={{ y: 10 }}
         animate={{ y: 0 }}
-        
         transition={{ type: "spring", bounce: 0.4, duration: 0.7 }}
         className="CardContainer"
       >
@@ -36,8 +39,34 @@ const ProdCard = ({ data }) => {
             </p>
           </div>
         </div>
-        <LikeRatio LikeData={data} />
+        <div>
+          <LikeRatio LikeData={data} />
+          <button
+            onClick={() => setOpenCloseModal(true)}
+            className="deleteButton"
+          >
+            X
+          </button>
+        </div>
       </motion.div>
+      <Modal show={openCloseModal} onClose={() => setOpenCloseModal(false)}>
+        <Modal.Header>Delete product</Modal.Header>
+        <Modal.Body>
+          <div className="space-y-6">
+            <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+              Are you sure you want to delete this product?
+            </p>
+          </div>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button color="red" onClick={() => setOpenCloseModal(false)}>
+            Confirm
+          </Button>
+          <Button color="gray" onClick={() => setOpenCloseModal(false)}>
+            Cancel
+          </Button>
+        </Modal.Footer>
+      </Modal>
       <PictureModal
         modalOpen={modalOpen}
         setModalOpen={setModalOpen}
