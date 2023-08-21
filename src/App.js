@@ -15,22 +15,7 @@ function App() {
   const products = useSelector((state) => state.productsReducer.prods);
   const loading = useSelector((state) => state.productsReducer.loading);
 
-  const [currentPage, setCurrentPage] = useState(1);
-
-  const [prodsPP, setProdsPP] = useState(4);
-  const [activePage, setActivePage] = useState(4);
-  const handleChange = (number) => {
-    setProdsPP(number);
-    setActivePage(number);
-  };
-  const productsPerPage = prodsPP;
-  const lastIndex = currentPage * productsPerPage;
-  const firstIndex = lastIndex - productsPerPage;
-  const prods = products.slice(firstIndex, lastIndex);
-  const npage = Math.ceil(products.length / productsPerPage);
-
-  const [selectedFilters, setSelectedFilters] = useState([]);
-  const [filteredItems, setFilteredItems] = useState(products);
+  // Pagination
 
   let filters = [
     "Electronics",
@@ -41,7 +26,39 @@ function App() {
     "Home",
     "Sports",
   ];
+  const [currentPage, setCurrentPage] = useState(1);
+  const [prodsPP, setProdsPP] = useState(4);
+  const [activePage, setActivePage] = useState(4);
 
+  const handleChange = (number) => {
+    setProdsPP(number);
+    setActivePage(number);
+  };
+  const lastIndex = currentPage * prodsPP;
+  const firstIndex = lastIndex - prodsPP;
+  const prods = products.slice(firstIndex, lastIndex);
+  const npage = Math.ceil(products.length / prodsPP);
+
+  // Pagination for filtered products
+
+  const [filteredItems, setFilteredItems] = useState(products);
+  const [prodsPPFiltered, setProdsPPFiltered] = useState(4);
+  const [activePageFiltered, setActivePageFiltered] = useState(4);
+  const handleChangeFiltered = (number) => {
+    setProdsPPFiltered(number);
+    setActivePageFiltered(number);
+  };
+  const lastIndexFiltered = currentPage * prodsPPFiltered;
+  const firstIndexFiltered = lastIndexFiltered - prodsPPFiltered;
+  const prodsFiltered = filteredItems.slice(
+    firstIndexFiltered,
+    lastIndexFiltered
+  );
+  const npageFiltered = Math.ceil(filteredItems.length / prodsPPFiltered);
+
+  // Filter
+
+  const [selectedFilters, setSelectedFilters] = useState([]);
   const handleFilterButtonClick = (selectedCategory) => {
     if (selectedFilters.includes(selectedCategory)) {
       let filters = selectedFilters.filter((el) => el !== selectedCategory);
@@ -69,25 +86,8 @@ function App() {
     }
   };
 
-  // Pagination for filtered products
-  const [currentPageFiltered, setCurrentPageFiltered] = useState(1);
+  const [deleteById, setDeleteById] = useState("");
 
-  const [prodsPPFiltered, setProdsPPFiltered] = useState(4);
-  const [activePageFiltered, setActivePageFiltered] = useState(4);
-  const handleChangeFiltered = (number) => {
-    setProdsPPFiltered(number);
-    setActivePageFiltered(number);
-  };
-  const productsPerPageFiltered = prodsPPFiltered;
-  const lastIndexFiltered = currentPageFiltered * productsPerPageFiltered;
-  const firstIndexFiltered = lastIndexFiltered - productsPerPageFiltered;
-  const prodsFiltered = filteredItems.slice(
-    firstIndexFiltered,
-    lastIndexFiltered
-  );
-  const npageFiltered = Math.ceil(
-    filteredItems.length / productsPerPageFiltered
-  );
   return (
     <div className={loading ? "AppLoading" : "App"}>
       {loading ? (
@@ -112,9 +112,16 @@ function App() {
           {filteredItems == 0 ? (
             <>
               <div className="Box">
-                {prods.map((prod) => (
-                  <ProdCard data={prod} key={uuidv4()} />
-                ))}
+                {prods
+                  .filter((item) => deleteById.indexOf(item.id) === -1)
+                  .map((prod) => (
+                    <ProdCard
+                      deleteById={deleteById}
+                      setDeleteById={setDeleteById}
+                      data={prod}
+                      key={uuidv4()}
+                    />
+                  ))}
               </div>
               <PaginationComponent
                 currentPage={currentPage}
@@ -127,14 +134,21 @@ function App() {
           ) : (
             <>
               <div className="Box">
-                {prodsFiltered.map((prod) => (
-                  <ProdCard data={prod} key={uuidv4()} />
-                ))}
+                {prodsFiltered
+                  .filter((item) => deleteById.indexOf(item.id) === -1)
+                  .map((prod) => (
+                    <ProdCard
+                      deleteById={deleteById}
+                      setDeleteById={setDeleteById}
+                      data={prod}
+                      key={uuidv4()}
+                    />
+                  ))}
               </div>
               <PaginationComponent
                 filteredItems={filteredItems}
-                currentPage={currentPageFiltered}
-                setCurrentPage={setCurrentPageFiltered}
+                currentPage={currentPage}
+                setCurrentPage={setCurrentPage}
                 npage={npageFiltered}
                 handleChange={handleChangeFiltered}
                 activePage={activePageFiltered}

@@ -1,18 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Pragati+Narrow&family=Roboto+Mono:wght@700&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-@media only screen and (max-width: 600px) {
-  .Box {
-    width: 200px;
-    margin: auto;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 5%;
-    justify-content: center;
-  }
-}
 
 .App {
   background-color: #e2cfc1;
@@ -35,7 +25,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 20%;
+  width: 15rem;
   margin-top: 3%;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   background: rgb(250, 235, 228);
@@ -47,7 +37,7 @@
   transition: 0.2s;
 }
 .CardContainer:hover {
-  width: 20%;
+  width: 15rem;
   margin-top: 3%;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
     rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;

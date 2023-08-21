@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import LikeRatio from "./LikeRatio";
 import PictureModal from "./PictureModal";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { Button, Modal } from "flowbite-react";
 
-const ProdCard = ({ data }) => {
+const ProdCard = ({ data, setDeleteById, deleteById }) => {
   const [modalOpen, setModalOpen] = useState(false);
 
   const openModal = () => {
@@ -17,7 +17,7 @@ const ProdCard = ({ data }) => {
 
   const [openCloseModal, setOpenCloseModal] = useState(false);
   return (
-    <AnimatePresence>
+    <>
       <motion.div
         initial={{ y: 10 }}
         animate={{ y: 0 }}
@@ -59,7 +59,10 @@ const ProdCard = ({ data }) => {
           </div>
         </Modal.Body>
         <Modal.Footer>
-          <Button color="red" onClick={() => setOpenCloseModal(false)}>
+          <Button
+            color="red"
+            onClick={() => setDeleteById([...deleteById, data.id])}
+          >
             Confirm
           </Button>
           <Button color="gray" onClick={() => setOpenCloseModal(false)}>
@@ -72,7 +75,7 @@ const ProdCard = ({ data }) => {
         setModalOpen={setModalOpen}
         data={data}
       />
-    </AnimatePresence>
+    </>
   );
 };
 
