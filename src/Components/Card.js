@@ -16,6 +16,7 @@ const ProdCard = ({ data, setDeleteById, deleteById }) => {
   };
 
   const [openCloseModal, setOpenCloseModal] = useState(false);
+
   return (
     <>
       <motion.div
@@ -45,7 +46,7 @@ const ProdCard = ({ data, setDeleteById, deleteById }) => {
             onClick={() => setOpenCloseModal(true)}
             className="deleteButton"
           >
-            X
+            <i className="bi bi-trash-fill"></i>
           </button>
         </div>
       </motion.div>
